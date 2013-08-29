@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ProductWideArtifacts</id>
+    <version>1.0.0</version>
+    <authors>vladsm</authors>
+    <owners>vladsm</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+		Applies product-wide artefacts, located at the solution level, to the projects.
+		The following actions are performing: SNK-signing with single product key, 
+		splitting AssemblyInfo into product part and local project part,
+		adding custom dictionary link to the project.
+	</description>
+    <copyright>Copyright 2013 Vladimir Smirnov</copyright>
+    <tags>snk product-wide link assemblyinfo dictionary</tags>
+  </metadata>
+</package>
