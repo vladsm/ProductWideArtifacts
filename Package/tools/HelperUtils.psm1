@@ -39,4 +39,42 @@ function Get-ProductWideItemInfo {
 }
 
 
-Export-ModuleMember Get-ProductWideItemInfo
+#==================================================================================================
+# Tries to find item named as @fileName in the Properties folder of the project represented
+# with $project. If it is found it returns the item. Otherwise, adds the new item as a $filePath
+# file link into Properties folder of the project and returns the item.
+#==================================================================================================
+function GetOrAddFileLinkToProjectPropertiesFolder
+{
+    param(
+        $project,
+        $fileName,
+        $filePath
+    )
+
+    try
+    {
+        $propertiesFolderItem = $project.ProjectItems.Item("Properties")
+    }
+    catch
+    {
+        $propertiesFolderItem = $project
+    }
+    try
+    {
+        $item = $propertiesFolderItem.ProjectItems.Item($fileName)
+    }
+    catch
+    {
+        $item = $null
+    }
+    if ($item -eq $null)
+    {
+        $item = $propertiesFolderItem.ProjectItems.AddFromFile($filePath)
+    }
+
+    return $item
+}
+
+
+Export-ModuleMember Get-ProductWideItemInfo, GetOrAddFileLinkToProjectPropertiesFolder

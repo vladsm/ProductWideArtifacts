@@ -6,11 +6,17 @@ Import-Module(Join-Path $toolsPath ProductWideUtils.psm1) -Force
 #
 # Remove dummy content
 #
-$project.ProjectItems | ForEach { if ($_.Name -eq "Dummy.txt") {  $_.Remove() } }
-Join-Path (Split-Path $project.FullName -Parent) "Dummy.txt" | Remove-Item
+$dummyFileName = "Dummy.txt"
+$project.ProjectItems | ForEach { if ($_.Name -eq $dummyFileName) {  $_.Remove() } }
+Join-Path (Split-Path $project.FullName -Parent) $dummyFileName | Remove-Item
 
 
 #
 # Sign project output assembly with product SNK key
 #
 SignWithProductKey($project)
+
+#
+# Add code analysis dictionary
+#
+Add-ProductCodeAnalysisDictionary($project)
